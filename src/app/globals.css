@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+#bgimg > img {
+  display: block;
+}
+
+#bgimg::after {
+  box-shadow: inset 0 0 10em 1em #000;
+  content: "";
+  width: 100%;
+  height: 100%;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
