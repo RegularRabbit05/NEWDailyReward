@@ -1,36 +1,33 @@
 "use client";
 
-import Image from "next/image";
 import moment from "moment";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Confetti from 'react-confetti'
+
+import {
+    useWindowSize,
+} from '@react-hook/window-size';
+import {useState} from "react";
 
 export default function Home() {
+    const [width, height] = useWindowSize();
+    const [showConfetti, setShowConfetti] = useState(false);
+
     return (
-        <main className="relative">
-            <div id="bgimg">
-                <Image
-                    src="/bg.jpg"
-                    draggable={false}
-                    alt="Background"
-                    width={1920}
-                    height={1080}
-                    className="h-screen w-screen brightness-50"
-                />
-            </div>
-            <div className="absolute w-full my-auto bottom-[45%] flex justify-center">
-                <div className="flex flex-col items-center w-full">
-                    <div className="my-5 w-4/12 text-center">
-                        <h3 className="text-3xl text-center py-4 font-extrabold">
-                            Check if Reg claimed his Daily Reward
-                        </h3>
-                        <p className="font-light">
-                            {
-                                "Clicking this button will show you if Reg claimed his daily today or not "
-                            }
-                            {"as well as sending him a notification if he forgot!"}
-                        </p>
-                    </div>
+        <>
+            <Confetti width={width} height={height} run={showConfetti} recycle={false} onConfettiComplete={() => setShowConfetti(false)} />
+        <main className={"reg_customBg w-screen h-screen flex justify-center items-center"}>
+            <div className={"w-full bg-black/70 flex justify-center py-10 backdrop-blur-sm"}>
+                <div className={"w-10/12 md:w-8/12 lg:w-4/12 flex flex-col items-center"}>
+                    <h3 className="text-3xl text-center pb-4 font-extrabold">
+                        Check if Reg claimed his Daily Reward
+                    </h3>
+                    <p className="font-light text-center">
+                        {"Clicking this button will show you whether Reg claimed his daily today or not "}
+                        {"as well as sending him a notification in case he forgot!"}
+                    </p>
+
                     <button
                         onClick={() => {
                             fetch("https://reg-daily-reward-api.vercel.app/api/checkPlayer")
@@ -51,6 +48,7 @@ export default function Home() {
                                             theme: "dark",
                                             transition: Bounce,
                                         });
+                                        setShowConfetti(true);
                                     } else {
                                         toast.error(`He did not! Last time was ${lastTimeStamp}`, {
                                             position: "bottom-center",
@@ -66,7 +64,7 @@ export default function Home() {
                                     }
                                 });
                         }}
-                        className="bg-black/50 px-40 backdrop-blur-sm py-6 rounded-lg hover:border-white border-2 border-black/50 animate-pulse"
+                        className="mt-5 bg-amber-500/90 w-3/5 py-5 rounded-tl-2xl rounded-tr-md rounded-bl-md rounded-br-2xl hover:border-white border-2 border-black/50 animate-pulse backdrop-blur-sm"
                     >
                         Query Hypixel
                     </button>
@@ -74,5 +72,6 @@ export default function Home() {
             </div>
             <ToastContainer />
         </main>
+        </>
     );
 }

@@ -2,15 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-#bgimg > img {
-  display: block;
-}
-
-#bgimg::after {
-  box-shadow: inset 0 0 10em 1em #000;
-  content: "";
-  width: 100%;
-  height: 100%;
+.reg_customBg {
+  background-image: url("/bg.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 :root {
