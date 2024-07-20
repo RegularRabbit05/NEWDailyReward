@@ -8,8 +8,7 @@ import Triangle from "@/components/Triangle";
 
 export default function Home() {
     const confettiClick = () => {
-        const end = Date.now() + 1000; // 3 seconds
-        const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
+        const end = Date.now() + 1000;
 
         const frame = () => {
             if (Date.now() > end) return;
