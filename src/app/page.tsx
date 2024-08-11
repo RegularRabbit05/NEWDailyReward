@@ -56,7 +56,7 @@ export default function Home() {
 
                         <button
                             onClick={() => {
-                                fetch("https://reg-daily-reward-api.vercel.app/api/checkPlayer")
+                                fetch("https://api.daily.projects.regdev.me/api/checkPlayer")
                                     .then((response) => response.json())
                                     .then((data) => {
                                         const lastTimeStamp = moment(
